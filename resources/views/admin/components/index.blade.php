@@ -26,6 +26,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Slug</th>
+                    <th>thickness</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -36,11 +37,16 @@
                     <td scope="row">{{$component->id}}</td>
                     <td>{{$component->name}}</td>
                     <td>{{$component->slug}}</td>
+                    @if($component->thickness->value ?? false)
+                    <td>{{ $component->thickness->value }}</td>
+                    @else
+                    <td></td>
+                    @endif
 
                     <td>
                         <a href="{{route('admin.components.show',[$catalog->slug,$category->slug,$component->slug])}}" class="btn">View</a>
                         <a href="{{route('admin.components.edit',[$catalog->slug,$category->slug,$component->slug])}}" class="btn">Edit</a>
-                        @include('admin.categories.partials.delete-button')
+                        @include('admin.components.partials.delete-button')
                     </td>
                 </tr>
                 @empty

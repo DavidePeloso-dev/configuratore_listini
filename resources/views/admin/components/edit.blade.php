@@ -38,6 +38,19 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="thickness_id" class="form-label">City</label>
+            <select class="form-select form-select-lg" name="thickness_id" id="thickness_id">
+                <option value="" selected>Select thickness</option>
+                @foreach($thicknesses as $thickness)
+                <option value="{{$thickness->id}}" {{old('thickness_id', $component->thickness_id) == $thickness->id ? 'selected' : ''}}>{{$thickness->value}}</option>
+                @endforeach
+            </select>
+            @error('thickness_id')
+            <div class="text-danger">{{$message}}</div>
+            @enderror
+        </div>
+
 
         <button type="submit" class="btn btn-primary">
             Update Component

@@ -24,7 +24,8 @@ class StoreComponentRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique('components')->where('category_id', $this->input('category_id'))],
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'thickness_id' => 'nullable'
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateComponentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Catalog;
 use App\Models\Category;
+use App\Models\Thickness;
 use Illuminate\Support\Str;
 
 class ComponentController extends Controller
@@ -19,7 +20,7 @@ class ComponentController extends Controller
     {
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
-        $components = Component::all()->where('category_id', $category->id);
+        $components = Component::with('thickness')->where('category_id', $category->id)->get();
         return view('admin.components.index', compact('catalog', 'category', 'components'));
     }
 
@@ -32,7 +33,8 @@ class ComponentController extends Controller
         //dd($catalog);
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         //dd($category);
-        return view('admin.components.create', compact('catalog', 'category'));
+        $thicknesses = Thickness::all()->where('catalog_id', $catalog->id);
+        return view('admin.components.create', compact('catalog', 'category', 'thicknesses'));
     }
 
     /**
@@ -64,10 +66,11 @@ class ComponentController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $component = Component::where('slug', $componentSlug)->where('category_id', $category->id)->first();
+        $thicknesses = Thickness::all()->where('catalog_id', $catalog->id);
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Update components that are NOT Yours!");
         }
-        return view('admin.components.edit', compact('catalog', 'category', 'component'));
+        return view('admin.components.edit', compact('catalog', 'category', 'component', 'thicknesses'));
     }
 
     /**
@@ -79,6 +82,7 @@ class ComponentController extends Controller
         if ($valdata['name']) {
             $valdata['slug'] = Str::slug($valdata['name'], '-');
         }
+        //dd($valdata['thickness_id']);
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $component = Component::where('slug', $componentSlug)->where('category_id', $category->id)->first();
