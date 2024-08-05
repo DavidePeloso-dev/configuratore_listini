@@ -50,19 +50,20 @@ class CategoryController extends Controller
      */
     public function show($catalogSlug, Category $category)
     {
-        $catalog = Catalog::where('slug', $catalogSlug)->first();
+        /*  $catalog = Catalog::where('slug', $catalogSlug)->first();
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T See Categories that are NOT Yours!");
-        }
+        } */
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($catalogSlug, Category $category)
+    public function edit($catalogSlug, $categorySlug)
     {
         $catalog = Catalog::where('slug', $catalogSlug)->first();
+        $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Update Categories that are NOT Yours!");
         }
@@ -82,18 +83,20 @@ class CategoryController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $category->update($valdata);
-        return to_route('admin.categories.index', $catalog->slug)->with('message', 'Congratulation Category Updated Correctly!');
+        return to_route('admin.categories.index', $catalogSlug)->with('message', 'Congratulation Category Updated Correctly!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($catalogSlug, Category $category)
+    public function destroy($catalogSlug, $categorySlug)
     {
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Delete Categories that are NOT Yours!");
         }
+        $catalog = Catalog::where('slug', $catalogSlug)->first();
+        $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $category->delete();
         return to_route('admin.categories.index', $catalog->slug)->with('message', 'Congratulation Category deleted correctly!');
     }

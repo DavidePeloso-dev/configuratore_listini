@@ -38,7 +38,7 @@
                     <td>{{$category->slug}}</td>
 
                     <td>
-                        <a href="{{route('admin.categories.show',[$catalog->slug,$category->slug])}}" class="btn">View</a>
+                        <a href="{{route('admin.components.index',[$catalog->slug,$category->slug])}}" class="btn">View</a>
                         <a href="{{route('admin.categories.edit',[$catalog->slug,$category->slug])}}" class="btn">Edit</a>
                         @include('admin.categories.partials.delete-button')
                     </td>
