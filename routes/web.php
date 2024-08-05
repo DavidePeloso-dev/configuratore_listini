@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ComponentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,9 @@ Route::middleware(['auth', 'verified'])
         Route::resource('catalogs', CatalogController::class)->parameters(['catalogs' => 'catalog:slug']);
         Route::resource('catalogs/{catalog}/categories', CategoryController::class)->parameters([
             'categories' => 'category:slug',
+        ]);
+        Route::resource('catalogs/{catalog}/categories/{category}/components', ComponentController::class)->parameters([
+            'components' => 'component:slug'
         ]);
     });
 
