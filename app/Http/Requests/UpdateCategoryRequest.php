@@ -23,8 +23,8 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        //dd($this->input());
-        $category = Category::where('catalog_id', $this->input('catalog_id'))->where('name', $this->input('name'))->first();
+        dd($this->category);
+        $category = Category::where('catalog_id', $this->input('catalog_id'))->where('slug', $this->category)->first();
         return [
             'name' => ['required', Rule::unique('categories')->where('catalog_id', $this->input('catalog_id'))->ignore($category->id)],
             'catalog_id' => 'required'

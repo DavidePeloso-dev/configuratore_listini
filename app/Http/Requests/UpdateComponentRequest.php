@@ -23,8 +23,8 @@ class UpdateComponentRequest extends FormRequest
      */
     public function rules(): array
     {
-        //dd($this->input('name'));
-        $component = Component::where('category_id', $this->input('category_id'))->where('name', $this->input('name'))->first();
+        dd($this->component);
+        $component = Component::where('category_id', $this->input('category_id'))->where('slug', $this->component)->first();
         return [
             'name' => ['required', Rule::unique('components')->where('category_id', $this->input('category_id'))->ignore($component->id)],
             'category_id' => 'required'
