@@ -19,7 +19,7 @@
         <a href="#">
             <h5>Articles</h5>
         </a>
-        <a href="#">
+        <a href="{{route('admin.thicknesses.index',$catalog->slug)}}">
             <h5>Thicknesses</h5>
         </a>
         <a href="#">

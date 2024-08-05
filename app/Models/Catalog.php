@@ -22,4 +22,9 @@ class Catalog extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public function thicknesses(): HasMany
+    {
+        return $this->hasMany(Thickness::class);
+    }
 }

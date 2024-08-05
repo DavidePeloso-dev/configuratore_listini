@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ComponentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ThicknessController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'verified'])
         ]);
         Route::resource('catalogs/{catalog}/categories/{category}/components', ComponentController::class)->parameters([
             'components' => 'component:slug'
+        ]);
+        Route::resource('catalogs/{catalog}/thicknesses', ThicknessController::class)->parameters([
+            'thicknesses' => 'thickness:value'
         ]);
     });
 
