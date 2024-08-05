@@ -60,7 +60,7 @@ class ThicknessController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $thickness = Thickness::where('value', $thicknessValue)->where('catalog_id', $catalog->id)->first();
         if ($catalog->user_id != auth()->id()) {
-            abort(403, "You Can'T Update Categories that are NOT Yours!");
+            abort(403, "You Can'T Update Thicknesses that are NOT Yours!");
         }
         return view('admin.thicknesses.edit', compact('catalog', 'thickness'));
     }
@@ -86,7 +86,7 @@ class ThicknessController extends Controller
     {
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         if ($catalog->user_id != auth()->id()) {
-            abort(403, "You Can'T Delete Categories that are NOT Yours!");
+            abort(403, "You Can'T Delete Thicknesses that are NOT Yours!");
         }
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $thickness = Thickness::where('value', $thicknessValue)->where('catalog_id', $catalog->id)->first();

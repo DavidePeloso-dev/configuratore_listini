@@ -36,7 +36,6 @@
                     <td>{{$thickness->value}}</td>
 
                     <td>
-                        <a href="{{route('admin.thicknesses.show',[$catalog->slug,$thickness->value])}}" class="btn">View</a>
                         <a href="{{route('admin.thicknesses.edit',[$catalog->slug,$thickness->value])}}" class="btn">Edit</a>
                         @include('admin.thicknesses.partials.delete-button')
                     </td>

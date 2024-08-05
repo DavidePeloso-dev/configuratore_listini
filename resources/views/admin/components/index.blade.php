@@ -44,7 +44,6 @@
                     @endif
 
                     <td>
-                        <a href="{{route('admin.components.show',[$catalog->slug,$category->slug,$component->slug])}}" class="btn">View</a>
                         <a href="{{route('admin.components.edit',[$catalog->slug,$category->slug,$component->slug])}}" class="btn">Edit</a>
                         @include('admin.components.partials.delete-button')
                     </td>
