@@ -16,7 +16,7 @@
         <a href="{{route('admin.categories.index',$catalog->slug)}}">
             <h5>Articles Categories</h5>
         </a>
-        <a href="#">
+        <a href="{{route('admin.articles.index',$catalog->slug)}}">
             <h5>Articles</h5>
         </a>
         <a href="{{route('admin.thicknesses.index',$catalog->slug)}}">

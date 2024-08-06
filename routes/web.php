@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -37,6 +38,9 @@ Route::middleware(['auth', 'verified'])
         ]);
         Route::resource('catalogs/{catalog}/thicknesses', ThicknessController::class)->parameters([
             'thicknesses' => 'thickness:value'
+        ]);
+        Route::resource('catalogs/{catalog}/articles', ArticleController::class)->parameters([
+            'articles' => 'article:code',
         ]);
     });
 
