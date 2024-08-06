@@ -7,7 +7,7 @@
         <h2>Categories</h2>
         <div class="my-3 d-flex align-items-center gap-3">
             <a href="{{route('admin.categories.create',$catalog->slug)}}">
-                <span>Add Categories </span>
+                <span>Add Category </span>
                 <i class="bi bi-plus-circle"></i>
             </a>
             <a href="{{route('admin.catalogs.show',$catalog)}}">
