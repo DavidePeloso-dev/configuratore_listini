@@ -19,7 +19,9 @@ class CategoryController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         //dd($catalog);
         $categories = Category::all()->where('catalog_id', $catalog->id);
-
+        if ($catalog->user_id != auth()->id()) {
+            abort(403, "You Can'T See Categories that are NOT Yours!");
+        }
         return view('admin.categories.index', compact('categories', 'catalog'));
     }
 

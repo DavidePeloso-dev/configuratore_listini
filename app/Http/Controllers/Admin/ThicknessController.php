@@ -19,7 +19,9 @@ class ThicknessController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         //dd($catalog);
         $thicknesses = Thickness::all()->where('catalog_id', $catalog->id);
-
+        if ($catalog->user_id != auth()->id()) {
+            abort(403, "You Can'T See Thicknesses that are NOT Yours!");
+        }
         return view('admin.thicknesses.index', compact('thicknesses', 'catalog'));
     }
 

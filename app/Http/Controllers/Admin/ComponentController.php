@@ -21,6 +21,9 @@ class ComponentController extends Controller
         $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $components = Component::with('thickness')->where('category_id', $category->id)->get();
+        if ($catalog->user_id != auth()->id()) {
+            abort(403, "You Can'T See Components that are NOT Yours!");
+        }
         return view('admin.components.index', compact('catalog', 'category', 'components'));
     }
 
