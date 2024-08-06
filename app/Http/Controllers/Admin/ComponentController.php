@@ -103,7 +103,6 @@ class ComponentController extends Controller
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Delete Components that are NOT Yours!");
         }
-        $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $component = Component::where('slug', $componentSlug)->where('category_id', $category->id)->first();
         $component->delete();

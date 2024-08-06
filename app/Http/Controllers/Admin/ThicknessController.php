@@ -90,7 +90,6 @@ class ThicknessController extends Controller
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Delete Thicknesses that are NOT Yours!");
         }
-        $catalog = Catalog::where('slug', $catalogSlug)->first();
         $thickness = Thickness::where('value', $thicknessValue)->where('catalog_id', $catalog->id)->first();
         $thickness->delete();
         return to_route('admin.thicknesses.index', $catalog->slug)->with('message', 'Congratulation Thickness deleted correctly!');

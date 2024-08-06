@@ -97,7 +97,6 @@ class CategoryController extends Controller
         if ($catalog->user_id != auth()->id()) {
             abort(403, "You Can'T Delete Categories that are NOT Yours!");
         }
-        $catalog = Catalog::where('slug', $catalogSlug)->first();
         $category = Category::where('slug', $categorySlug)->where('catalog_id', $catalog->id)->first();
         $category->delete();
         return to_route('admin.categories.index', $catalog->slug)->with('message', 'Congratulation Category deleted correctly!');
