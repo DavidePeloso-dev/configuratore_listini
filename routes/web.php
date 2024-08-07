@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+        Route::get('/application', [DashboardController::class, 'application'])->name('application');
         Route::resource('catalogs', CatalogController::class)->parameters(['catalogs' => 'catalog:slug']);
         Route::resource('catalogs/{catalog}/categories', CategoryController::class)->parameters([
             'categories' => 'category:slug',

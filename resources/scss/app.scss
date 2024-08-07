@@ -12,3 +12,28 @@ body * {
 
 
 /*#endregion*/
+
+/*#region three css*/
+.sidebar {
+    width: 300px;
+    min-height: calc(100vh - 56px);
+    background-color: #eeee;
+
+    i {
+        font-size: x-small;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .catalogs_menu {
+        background-color: lightgray;
+    }
+}
+
+.three_container {
+    width: min-content;
+}
+
+/*#endregion*/
